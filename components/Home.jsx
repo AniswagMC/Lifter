@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import Lift from './Lift'
 
 export default function Home() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,8 @@ export default function Home() {
       <View style={styles.countContainer}>
         <Text style={styles.countText}>{count || null}</Text>
       </View>
+
+      <Lift />
     </View>
   );
 }
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff', 
     alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'center',
   },
   button: {
     alignItems: 'center',
