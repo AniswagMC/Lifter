@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, TextInput, View, Text, TouchableHighlight, StatusBar } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { useState } from 'react';
 
@@ -19,6 +19,7 @@ export default function Lift() {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="red" />
       <Dropdown
         style={styles.dropdown}
         data={data}
@@ -121,8 +122,6 @@ const styles = StyleSheet.create({
     padding: 10
   },
   bottomButton: {
-    // position: 'absolute',
     top: 200,
-    // alignItems: 'center',
   }
 });
