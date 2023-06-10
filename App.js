@@ -1,9 +1,9 @@
-import Home from './components/Home'
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import Home from './components/Home';
+import Lift from './components/Lift';
 
 export default function App() {
   return (
-    <Home />
+    <Lift />
     
   );
 }

@@ -1,8 +1,11 @@
-import { StyleSheet, TextInput, View, Text } from 'react-native';
+import { StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { useState } from 'react';
 
 export default function Lift() {
+  const [count, setCount] = useState(0);
+  const onPress = () => setCount(count + 1);
+
   const [value, setValue] = useState(null);
   // const [isFocus, setIsFocus] = useState(false);
   const [isTextFocus, setTextFocus] = useState(false)
@@ -15,7 +18,7 @@ export default function Lift() {
   ];
 
   return (
-    <View>
+    <View style={styles.container}>
       <Dropdown
         style={styles.dropdown}
         data={data}
@@ -29,7 +32,7 @@ export default function Lift() {
         labelField="label"
         valueField="value"
         placeholder='Select Lift'
-        value = {value}
+        value={value}
       />
 
       <View style={styles.horizontal}>
@@ -38,9 +41,9 @@ export default function Lift() {
           onFocus={() => setTextFocus(true)}
           onBlur={() => setTextFocus(false)}
           keyboardType="numeric"
-          placeholder = "Sets"
+          placeholder="Sets"
         />
-        <Text style = {styles.cross}>
+        <Text style={styles.cross}>
           X
         </Text>
         <TextInput
@@ -48,14 +51,34 @@ export default function Lift() {
           onFocus={() => setTextFocus(true)}
           onBlur={() => setTextFocus(false)}
           keyboardType="numeric"
-          placeholder = "Reps"
+          placeholder="Reps"
         />
       </View>
+
+      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={styles.touchable}>
+        <View style={styles.button}>
+          <Text>
+            Submit
+          </Text>
+        </View>
+      </TouchableHighlight>
+
+      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={StyleSheet.flatten([styles.touchable, styles.bottomButton])}>
+        <View style = {styles.button}>
+          <Text>
+            Add Lift
+          </Text>
+        </View>
+      </TouchableHighlight>
     </View>
   )
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   dropdown: {
     marginLeft: 10,
     marginRight: 10,
@@ -84,5 +107,22 @@ const styles = StyleSheet.create({
   cross: {
     alignSelf: 'center',
     marginHorizontal: 10
+  },
+  touchable: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10
+  },
+  button: {
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 10,
+    padding: 10
+  },
+  bottomButton: {
+    // position: 'absolute',
+    top: 200,
+    // alignItems: 'center',
   }
 });
