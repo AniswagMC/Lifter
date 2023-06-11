@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Lift from './Lift'
 
-export default function Home() {
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(count + 1);
+export default function Home({ navigation }) {
+  const onPress = () => navigation.navigate('Lift');
 
   return (
     <View style={styles.container}>
@@ -15,12 +14,6 @@ export default function Home() {
           </Text>
         </View>
       </TouchableHighlight>
-
-      <View style={styles.countContainer}>
-        <Text style={styles.countText}>{count || null}</Text>
-      </View>
-
-      <Lift />
     </View>
   );
 }
@@ -41,8 +34,5 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 10,
     padding: 10
-  },
-  countContainer: {
-    alignItems: 'center'
   }
 });
