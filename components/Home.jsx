@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import Lift from './Lift'
 
 export default function Home({ navigation }) {
-  const onPress = () => navigation.navigate('Lift');
+  const onPress = () => navigation.navigate('Lifts');
 
   return (
     <View style={styles.container}>

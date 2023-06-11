@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-nat
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { useState } from 'react';
 
-export default function Lift() {
+export default function Lift({ navigate }) {
   const [count, setCount] = useState(0);
   const onPress = () => setCount(count + 1);
 
@@ -19,54 +19,58 @@ export default function Lift() {
 
   return (
     <View style={styles.container}>
-      <Dropdown
-        style={styles.dropdown}
-        data={data}
-        search
-        // onFocus={() => setIsFocus(true)}
-        // onBlur={() => setIsFocus(false)}
-        onChange={item => {
-          setValue(item.value);
-          // setIsFocus(false);
-        }}
-        labelField="label"
-        valueField="value"
-        placeholder='Select Lift'
-        value={value}
-      />
+      <View style={styles.topInnerContainer}>
+        <Dropdown
+          style={styles.dropdown}
+          data={data}
+          search
+          // onFocus={() => setIsFocus(true)}
+          // onBlur={() => setIsFocus(false)}
+          onChange={item => {
+            setValue(item.value);
+            // setIsFocus(false);
+          }}
+          labelField="label"
+          valueField="value"
+          placeholder='Select Lift'
+          value={value}
+        />
 
-      <View style={styles.horizontal}>
-        <TextInput
-          style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
-          onFocus={() => setTextFocus(true)}
-          onBlur={() => setTextFocus(false)}
-          keyboardType="numeric"
-          placeholder="Sets"
-        />
-        <Text style={styles.cross}>
-          X
-        </Text>
-        <TextInput
-          style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
-          onFocus={() => setTextFocus(true)}
-          onBlur={() => setTextFocus(false)}
-          keyboardType="numeric"
-          placeholder="Reps"
-        />
+        <View style={styles.horizontal}>
+          <TextInput
+            style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
+            onFocus={() => setTextFocus(true)}
+            onBlur={() => setTextFocus(false)}
+            keyboardType="numeric"
+            placeholder="Lbs"
+          />
+          <Text style={styles.cross}>
+            X
+          </Text>
+          <TextInput
+            style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
+            onFocus={() => setTextFocus(true)}
+            onBlur={() => setTextFocus(false)}
+            keyboardType="numeric"
+            placeholder="Sets"
+          />
+          <Text style={styles.cross}>
+            X
+          </Text>
+          <TextInput
+            style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
+            onFocus={() => setTextFocus(true)}
+            onBlur={() => setTextFocus(false)}
+            keyboardType="numeric"
+            placeholder="Reps"
+          />
+        </View>
       </View>
 
-      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={styles.touchable}>
+      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={StyleSheet.flatten([styles.touchable, styles.bottomButton])}>
         <View style={styles.button}>
           <Text>
             Submit
-          </Text>
-        </View>
-      </TouchableHighlight>
-
-      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={StyleSheet.flatten([styles.touchable, styles.bottomButton])}>
-        <View style = {styles.button}>
-          <Text>
-            Add Lift
           </Text>
         </View>
       </TouchableHighlight>
@@ -79,6 +83,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'white',
+  },
+  topInnerContainer: {
+    borderWidth: 3,
+    borderColor: 'black',
+    borderRadius: 20,
+    paddingVertical: 10
   },
   dropdown: {
     marginLeft: 10,
@@ -113,13 +123,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10
-  },
-  button: {
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'black',
-    borderRadius: 10,
-    padding: 10
   },
   bottomButton: {
     top: 200,
