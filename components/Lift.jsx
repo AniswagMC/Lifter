@@ -66,14 +66,6 @@ export default function Lift({ navigate }) {
           />
         </View>
       </View>
-
-      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={StyleSheet.flatten([styles.touchable, styles.bottomButton])}>
-        <View style={styles.button}>
-          <Text>
-            Submit
-          </Text>
-        </View>
-      </TouchableHighlight>
     </View>
   )
 };

@@ -1,26 +1,57 @@
-import { StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, TouchableHighlight, Button, FlatList } from 'react-native';
 import React, { useState } from 'react';
+import uuid from 'react-native-uuid';
 import Lift from './Lift'
 
-export default function Lifts() {
-  const [liftCard, setLiftCard] = useState([])
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(count + 1);
+export default function Lifts({ navigation }) {
+  const [cards, setCards] = useState([])
+
+  const onAdd = () => {
+    setCards([...cards, { id: uuid.v4() }])
+  }
+
+  const onSubmit = () => {
+    navigation.navigate('Home')
+  }
+
+  const emptyList = () => {
+    return (
+      <Text style={{ alignSelf: 'center' }}>
+        Time to get lifting
+      </Text>
+    )
+  }
 
   return (
-    <View>
-      <TouchableHighlight onPress={onPress} underlayColor={'#DDDDDD'} style={styles.touchable}>
+    <FlatList
+      data={cards}
+      ListEmptyComponent={emptyList}
+      keyExtractor={cards => cards.id}
+      renderItem={() => {
+        return (
+          <Lift />
+        )
+      }}
+
+      ListHeaderComponent={
+        <TouchableHighlight onPress={onAdd} underlayColor={'#DDDDDD'} style={styles.touchable}>
           <View style={styles.button}>
             <Text>
               Add Lift
             </Text>
           </View>
         </TouchableHighlight>
-
-        {liftCard.map((card) => (
-          <Lift />
-        ))}
-    </View>
+      }
+      ListFooterComponent={
+        <TouchableHighlight onPress={onSubmit} underlayColor={'#DDDDDD'} style={styles.touchable}>
+          <View style={styles.button}>
+            <Text>
+              Submit
+            </Text>
+          </View>
+        </TouchableHighlight>
+      }
+    />
   )
 }
 
@@ -31,9 +62,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 10,
     padding: 10,
+    marginTop: 10
   },
   touchable: {
     marginHorizontal: 10,
-    top: 10
+    marginTop: 10
   }
 })

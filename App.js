@@ -1,5 +1,6 @@
 import Home from './components/Home';
 import Lifts from './components/Lifts';
+import Lift from './components/Lift';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
@@ -19,6 +20,10 @@ export default function App() {
         <Stack.Screen 
           name = "Lifts"
           component={Lifts}
+        />
+        <Stack.Screen
+          name = "Lift"
+          component={Lift}
         />
       </Stack.Navigator>
     </NavigationContainer>
