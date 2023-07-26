@@ -14,7 +14,7 @@ export default function Lifts({ navigation }) {
     navigation.navigate('Home')
   }
 
-  const renderItem = () => {
+  const renderCard = () => {
     return (
       <LiftDisplay navigation={navigation} />
     )
@@ -33,7 +33,7 @@ export default function Lifts({ navigation }) {
       data={cards}
       ListEmptyComponent={emptyList}
       keyExtractor={cards => cards.id}
-      renderItem={ renderItem }
+      renderItem={ renderCard }
       windowSize={7}
       removeClippedSubviews={true}
       maxToRenderPerBatch={3}
