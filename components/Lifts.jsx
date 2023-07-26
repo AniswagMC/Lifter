@@ -22,16 +22,21 @@ export default function Lifts({ navigation }) {
     )
   }
 
+  const renderCard = () => {
+    return (
+      <Lift />
+    )
+  }
+
   return (
     <FlatList
       data={cards}
       ListEmptyComponent={emptyList}
       keyExtractor={cards => cards.id}
-      renderItem={() => {
-        return (
-          <Lift />
-        )
-      }}
+      renderItem={renderCard}
+      windowSize={7}
+      removeClippedSubviews={true}
+      maxToRenderPerBatch={3}
 
       ListHeaderComponent={
         <TouchableHighlight onPress={onAdd} underlayColor={'#DDDDDD'} style={styles.touchable}>
