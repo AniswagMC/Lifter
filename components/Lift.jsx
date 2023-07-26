@@ -1,14 +1,11 @@
 import { StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { useState } from 'react';
+import Input from './Input'
 
-export default function Lift({ navigate }) {
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(count + 1);
-
+export default function Lift({ navigation }) {
   const [value, setValue] = useState(null);
-  // const [isFocus, setIsFocus] = useState(false);
-  const [isTextFocus, setTextFocus] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(1)
 
   const data = [
     { label: 'Squat', value: 'Squat' },
@@ -19,53 +16,56 @@ export default function Lift({ navigate }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topInnerContainer}>
-        <Dropdown
-          style={styles.dropdown}
-          data={data}
-          search
-          // onFocus={() => setIsFocus(true)}
-          // onBlur={() => setIsFocus(false)}
-          onChange={item => {
-            setValue(item.value);
-            // setIsFocus(false);
-          }}
-          labelField="label"
-          valueField="value"
-          placeholder='Select Lift'
-          value={value}
+      <Dropdown
+        style={styles.dropdown}
+        data={data}
+        // search
+        onChange={item => {
+          setValue(item.value);
+        }}
+        labelField="label"
+        valueField="value"
+        placeholder='Select Lift'
+        value={value}
+      />
+
+      <View style={styles.horizontal}>
+        <Input
+          text="Lbs"
+          isFocus={activeIndex === 0}
+          onFocus={() => setActiveIndex(0)}
         />
 
-        <View style={styles.horizontal}>
-          <TextInput
-            style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
-            onFocus={() => setTextFocus(true)}
-            onBlur={() => setTextFocus(false)}
-            keyboardType="numeric"
-            placeholder="Lbs"
-          />
-          <Text style={styles.cross}>
-            X
-          </Text>
-          <TextInput
-            style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
-            onFocus={() => setTextFocus(true)}
-            onBlur={() => setTextFocus(false)}
-            keyboardType="numeric"
-            placeholder="Sets"
-          />
-          <Text style={styles.cross}>
-            X
-          </Text>
-          <TextInput
-            style={isTextFocus ? styles.inputOnFocus : styles.inputOnBlur}
-            onFocus={() => setTextFocus(true)}
-            onBlur={() => setTextFocus(false)}
-            keyboardType="numeric"
-            placeholder="Reps"
-          />
-        </View>
+        <Text style={styles.cross}>
+          X
+        </Text>
+
+        <Input
+          text="Sets"
+          isFocus={activeIndex === 1}
+          onFocus={() => setActiveIndex(1)}
+        />
+
+        <Text style={styles.cross}>
+          X
+        </Text>
+
+        <Input
+          text="Reps"
+          isFocus={activeIndex === 2}
+          onFocus={() => setActiveIndex(2)}
+        />
       </View>
+
+      <TouchableHighlight 
+        onPress={() => navigation.navigate('Lifts')} 
+        style = {{ marginTop: 10, borderColor: 'black', borderWidth: 2 }}
+        underlayColor={'#DDDDDD'} 
+      >
+        <Text style = {{ alignSelf: 'center' }}>
+          Done
+        </Text>
+      </TouchableHighlight>
     </View>
   )
 };
@@ -73,31 +73,27 @@ export default function Lift({ navigate }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: 'white',
-  },
-  topInnerContainer: {
-    borderWidth: 3,
-    borderColor: 'black',
-    borderRadius: 20,
-    paddingVertical: 10
   },
   dropdown: {
     marginLeft: 10,
     marginRight: 10,
+    marginTop:
+      20
   },
   inputOnFocus: {
-    height: 40,
-    width: 60,
+    height: 100,
+    width: 100,
     borderBottomColor: 'black',
-    borderColor: 'white',
+    borderColor: 'red',
     borderWidth: 2,
     padding: 10,
+    // backgroundColor: 'red',
+    fontSize: 35
   },
   inputOnBlur: {
     height: 40,
     width: 60,
-    borderBottomColor: 'black',
     borderColor: 'white',
     borderWidth: 1,
     padding: 10,
@@ -109,14 +105,7 @@ const styles = StyleSheet.create({
   },
   cross: {
     alignSelf: 'center',
-    marginHorizontal: 10
-  },
-  touchable: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10
-  },
-  bottomButton: {
-    top: 200,
+    marginHorizontal: 10,
+    fontWeight: 'bold'
   }
 });
