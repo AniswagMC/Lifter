@@ -14,6 +14,12 @@ export default function Lifts({ navigation }) {
     navigation.navigate('Home')
   }
 
+  const renderItem = () => {
+    return (
+      <LiftDisplay navigation={navigation} />
+    )
+  }
+
   const emptyList = () => {
     return (
       <Text style={{ alignSelf: 'center' }}>
@@ -27,11 +33,10 @@ export default function Lifts({ navigation }) {
       data={cards}
       ListEmptyComponent={emptyList}
       keyExtractor={cards => cards.id}
-      renderItem={() => {
-        return (
-          <LiftDisplay navigation={navigation}/>
-        )
-      }}
+      renderItem={ renderItem }
+      windowSize={7}
+      removeClippedSubviews={true}
+      maxToRenderPerBatch={3}
 
       ListHeaderComponent={
         <TouchableHighlight onPress={onAdd} underlayColor={'#DDDDDD'} style={styles.touchable}>
