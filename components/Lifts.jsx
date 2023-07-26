@@ -1,7 +1,7 @@
 import { StyleSheet, View, ScrollView, Text, TouchableHighlight, Button, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import uuid from 'react-native-uuid';
-import Lift from './Lift'
+import LiftDisplay from './LiftDisplay'
 
 export default function Lifts({ navigation }) {
   const [cards, setCards] = useState([])
@@ -29,7 +29,7 @@ export default function Lifts({ navigation }) {
       keyExtractor={cards => cards.id}
       renderItem={() => {
         return (
-          <Lift />
+          <LiftDisplay navigation={navigation}/>
         )
       }}
 
@@ -42,6 +42,8 @@ export default function Lifts({ navigation }) {
           </View>
         </TouchableHighlight>
       }
+      ListHeaderComponentStyle={styles.listTop}
+
       ListFooterComponent={
         <TouchableHighlight onPress={onSubmit} underlayColor={'#DDDDDD'} style={styles.touchable}>
           <View style={styles.button}>
@@ -51,6 +53,7 @@ export default function Lifts({ navigation }) {
           </View>
         </TouchableHighlight>
       }
+      ListFooterComponentStyle={styles.listBottom}
     />
   )
 }
@@ -62,10 +65,15 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 10,
     padding: 10,
-    marginTop: 10
   },
   touchable: {
     marginHorizontal: 10,
+  },
+  listTop: {
+    marginTop: 50,
+    marginBottom: 10
+  },
+  listBottom: {
     marginTop: 10
-  }
+  },
 })

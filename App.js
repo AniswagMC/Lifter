@@ -1,8 +1,10 @@
 import Home from './components/Home';
 import Lifts from './components/Lifts';
 import Lift from './components/Lift';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LiftDisplay from './components/LiftDisplay';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -10,7 +12,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="red" />
+      <StatusBar backgroundColor="black" />
       <Stack.Navigator>
         <Stack.Screen 
           name = "Home"
@@ -20,6 +22,10 @@ export default function App() {
         <Stack.Screen 
           name = "Lifts"
           component={Lifts}
+        />
+        <Stack.Screen 
+          name = "LiftDisplay"
+          component={LiftDisplay}
         />
         <Stack.Screen
           name = "Lift"
