@@ -28,12 +28,6 @@ export default function Lifts({ navigation }) {
     )
   }
 
-  const renderCard = () => {
-    return (
-      <Lift />
-    )
-  }
-
   return (
     <FlatList
       data={cards}

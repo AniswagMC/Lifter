@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 
-export default function Input({ text, isFocus, onFocus }) {
+export default function Input({ text, isFocus, onFocus, onValueChange, toDisplay }) {
+  const [value, setValue] = useState("")
+
   switch (text) {
     case "Lbs":
       return (
@@ -10,6 +12,8 @@ export default function Input({ text, isFocus, onFocus }) {
           onPressIn={onFocus}
           keyboardType="numeric"
           placeholder="Lbs"
+          onChange={item => setValue(item.value)}
+          value = {value}
         />
       );
 
@@ -20,6 +24,7 @@ export default function Input({ text, isFocus, onFocus }) {
           onPressIn={onFocus}
           keyboardType="numeric"
           placeholder="Sets"
+          onChange={onValueChange}
         />
       );
 
@@ -30,6 +35,7 @@ export default function Input({ text, isFocus, onFocus }) {
           onPressIn={onFocus}
           keyboardType="numeric"
           placeholder="Reps"
+          onChange={onValueChange}
         />
       );
 

@@ -1,11 +1,15 @@
 import { StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { useState } from 'react';
-import Input from './Input'
+// import Input from './Input'
 
 export default function Lift({ navigation }) {
   const [value, setValue] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(1)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const [lbs, setLbs] = useState(null)
+  const [sets, setSets] = useState(null)
+  const [reps, setReps] = useState(null)
 
   const data = [
     { label: 'Squat', value: 'Squat' },
@@ -19,7 +23,6 @@ export default function Lift({ navigation }) {
       <Dropdown
         style={styles.dropdown}
         data={data}
-        // search
         onChange={item => {
           setValue(item.value);
         }}
@@ -30,10 +33,13 @@ export default function Lift({ navigation }) {
       />
 
       <View style={styles.horizontal}>
-        <Input
-          text="Lbs"
-          isFocus={activeIndex === 0}
-          onFocus={() => setActiveIndex(0)}
+        <TextInput
+          style={isFocus ? styles.inputOnFocus : styles.inputOnBlur}
+          onPressIn={onFocus}
+          keyboardType="numeric"
+          placeholder="Lbs"
+          onChange={item => setValue(item.value)}
+          value={value}
         />
 
         <Text style={styles.cross}>
@@ -44,6 +50,8 @@ export default function Lift({ navigation }) {
           text="Sets"
           isFocus={activeIndex === 1}
           onFocus={() => setActiveIndex(1)}
+          onValueChange={item => setSets(item.value)}
+          toDisplay={sets}
         />
 
         <Text style={styles.cross}>
@@ -54,15 +62,17 @@ export default function Lift({ navigation }) {
           text="Reps"
           isFocus={activeIndex === 2}
           onFocus={() => setActiveIndex(2)}
+          onValueChange={item => setReps(item.value)}
+          toDisplay={reps}
         />
       </View>
 
-      <TouchableHighlight 
-        onPress={() => navigation.navigate('Lifts')} 
-        style = {{ marginTop: 10, borderColor: 'black', borderWidth: 2 }}
-        underlayColor={'#DDDDDD'} 
+      <TouchableHighlight
+        onPress={() => navigation.navigate('Lifts')}
+        style={{ marginTop: 10, borderColor: 'black', borderWidth: 2 }}
+        underlayColor={'#DDDDDD'}
       >
-        <Text style = {{ alignSelf: 'center' }}>
+        <Text style={{ alignSelf: 'center' }}>
           Done
         </Text>
       </TouchableHighlight>
@@ -78,25 +88,7 @@ const styles = StyleSheet.create({
   dropdown: {
     marginLeft: 10,
     marginRight: 10,
-    marginTop:
-      20
-  },
-  inputOnFocus: {
-    height: 100,
-    width: 100,
-    borderBottomColor: 'black',
-    borderColor: 'red',
-    borderWidth: 2,
-    padding: 10,
-    // backgroundColor: 'red',
-    fontSize: 35
-  },
-  inputOnBlur: {
-    height: 40,
-    width: 60,
-    borderColor: 'white',
-    borderWidth: 1,
-    padding: 10,
+    marginTop: 20
   },
   horizontal: {
     display: 'flex',
